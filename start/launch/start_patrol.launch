@@ -1,0 +1,24 @@
+<launch>
+    <!-- 启动巡逻的任务 -->
+
+    <!-- 设置参数，地图的名字，默认为 “map_test” -->
+    <arg name="map_name" default="map_test"/>
+    
+
+    <!-- 发布 base_link 到 base_footprint 的坐标变换 -->
+    <node pkg="tf" type="static_transform_publisher" name="base_footprint_broadcaster" args="0 0 0 0 0 0 /base_link /base_footprint 100"/>
+    <!-- 发布 map 到 odom 的坐标变换 -->
+    <node pkg="tf" type="static_transform_publisher" name="map_odom_broadcaster" args="0 0 0 0 0 0 /map /odom 100"/>
+
+    
+    <!-- 启动导航路径规划，避障的算法 -->
+    <include file="$(find navigation)/launch/navigation.launch">
+        <arg name="map_file" value="$(find start)/maps/gmapping/$(arg map_name).yaml"/>
+        <arg name="odom_topic" value="/localization/odom"/>
+	
+    </include>
+    
+	
+
+
+</launch>

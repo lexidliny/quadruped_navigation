@@ -1,0 +1,29 @@
+# 局部地图的参数
+local_costmap:
+  #set the update and publish frequency of the local costmap
+  update_frequency: 10.0
+  publish_frequency: 10.0
+  transform_tolerance: 0.5  
+  #we will use a map served by the map_server to initialize this costmap
+  static_map: false
+  rolling_window: true
+  # set the map size and resolutin
+  width: 6.0
+  height: 6.0
+  resolution: 0.1
+
+  obstacle_layer:
+    z_voxels: 100 # wt 20230222
+    max_obstacle_height: 2
+    
+    obstacle_range: 2.5
+    raytrace_range: 3
+    track_unknown_space: true
+ 
+    observation_sources: point_cloud_sensor
+    point_cloud_sensor: {max_obstacle_height: 2,sensor_frame: velodyne, data_type: PointCloud2, topic: points_raw, clearing: true, marking: true, min_obstacle_height: -0.58}
+
+  plugins:
+            - {name: static_map,    type: "costmap_2d::StaticLayer"}
+            - {name: obstacles,    type: "costmap_2d::VoxelLayer"}
+            - {name: inflation_layer,    type: "costmap_2d::InflationLayer"}

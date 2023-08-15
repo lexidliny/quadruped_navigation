@@ -1,0 +1,22 @@
+# 全局地图的参数
+global_costmap:
+  #set the update and publish frequency of the global costmap
+  update_frequency: 2.0
+  transform_tolerance: 0.5
+  publish_frequency: 1.0
+  #we will use a map served by the map_server to initialize this costmap
+  static_map: true
+  rolling_window: false
+  # set the map size and resolutin
+  width: 200.0
+  height: 200.0
+  resolution: 0.1
+
+  static_layer:
+    map_topic: /map
+    subscribe_to_updates: true
+    lethal_cost_threshold: 60
+
+  plugins:
+  - {name: static_layer, type: "costmap_2d::StaticLayer"}
+  

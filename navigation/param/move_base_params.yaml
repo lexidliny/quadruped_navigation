@@ -1,0 +1,17 @@
+# move_base 的参数设置
+#move base deactivate, shut down costmap
+shutdown_costmaps: false
+#frequency of send cmd for the robot
+controller_frequency: 10.0
+#the control spend the time for the cmd
+controller_patience: 30
+#the time of the planner planning a traj 
+planner_patience: 30
+planner_frequency: 5.0
+
+oscillation_timeout: 0
+oscillation_distance: 0.2
+
+conservative_reset_dist: 3.0
+recovery_behavior_enabled: true
+clearing_rotation_allowed: false
